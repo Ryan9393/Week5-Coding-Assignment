@@ -4,132 +4,6 @@
 // c.	Your menu should have the options to create, view, and delete elements.
 
 
-// class Player {
-//     constructor(name ,position){
-//         this.name = name;
-//         this.position = position;
-//     }
-
-//     describe(){
-//         return `${this.name} plays ${this.position}`;
-//     }
-// }
-
-// class Team {
-//     constructor(name){
-//         this.name = name;
-//         this.player = [];
-//     }
-
-//     addPLayer(player) {
-//         if (player instanceof Player){
-//             this.players.push(player);
-//         } else {
-//             throw new Error(`You can only add an instance of Player. Argument is not a player: ${player}`)
-//         }
-//     }
-
-//     describe(){
-//         return `${this.name} has ${this.player.length} players.`;
-//     }
-// }
-
-//  class Menu {
-//     constructor(){
-//         this.teams = [];
-//         this.selectedTeam = null; 
-//     }
-//     start(){
-//         let selection = this.showMainMenuOptions();
-//         while (selection != 0){
-//             switch (selection){
-//                 case '1':
-//                     this.createTeam();
-//                     break;
-//                 case '2':
-//                     this.viewTeam();
-//                     break;
-//                 case '3':
-//                     this.deleteTeam();
-//                     break;
-//                 case '4':
-//                     this.displayTeams();
-//                     break;
-//                 default:
-//                     selection = 0;
-//             }
-//             selection = this.showMainMenuOptions();
-//         }
-//         alert('Goodbye!');
-//     }
-//     showMainMenuOptions(){
-//         return prompt(`
-//         0) exit
-//         1) create new team
-//         2) view team
-//         3) delete team
-//         4) display teams
-//         `);
-//     }
-
-//     showTeamMenuOptions(teamInfo){
-//         return prompt(`
-//         0) back
-//         1) create player
-//         2) delete player
-//         --------------------
-//         `)
-//     }
-
-    
-//     displayTeams(){
-//         let teamString = '';
-//         for (let i = 0; i < this.teams.length; i++){
-//             teamString += i + ') ' + this.teams[i].name + '\n';
-//         }
-//         alert(teamString);
-//     }
-//     createTeam(){
-//         let name = prompt('Enter name for new team:');
-//         this.teams.push(new Team(name))
-//     }
-
-//     viewTeam() {
-//         let index = prompt('Enter the index of the team you wish to view:');
-//         if (index > -1 && index < this.teams.length){
-//             this.selectedTeam = this.teams[index];
-//             let description = 'Team Name:' + this.selectedTeam.name + '\n';
-
-//             for(let i = 0; i< this.selectedTeam.players.length; i++){
-//                 descript += i +') ' + this.selectedTeam.players[i].name + ' - ' + this.selectedTeam.players[i].position + '\n';
-//             }
-//             let selection = this.showTeamMenuOptions(description);
-//             switch (selection){
-//                 case '1':
-//                     this.createPlayer();
-//                     break;
-//                 case '2':
-//                     this.deletePlayer();
-//             }
-//         }
-//     }
-
-//     createPlayer() {
-//         let name = prompt('Enter name for new player:');
-//         let position = prompt('Enter position for new player:');
-//         this.selectedTeam.player.push(new Player(name, position));
-//     }
-
-//     deletePlayer(){
-//         let index = prompt('Enter the index of the player you wish to delete');
-//         if (index > -1 && index < this.selectedTeam.players.length){
-//             this.selectedTeam.players.splice(index, 1);
-//         }
-//     }
-// }
-
-
-
 class Item {
     constructor(name,price){
         this.name = name
@@ -143,7 +17,7 @@ class Item {
 class Store {
     constructor(name){
         this.name = name
-        this.item = []
+        this.items = []
     }
 
     addItem (item) {
@@ -155,13 +29,13 @@ class Store {
     }
 
     describe(){
-        return `${this.name} has ${this.item.length} items.`;
+        return `${this.name} has ${this.items.length} items.`;
     }
 }
 
 class Menu {
     constructor() {
-        this.stores = []
+        this.stores = [];
         this.selectedStore = null;
     }
     start() {
@@ -194,7 +68,7 @@ class Menu {
         1: Create Store
         2: View Store
         3: Display All Stores
-        4: Delete Store
+        4: Close Store
         `)
     }
 
@@ -203,23 +77,24 @@ class Menu {
         0: Back
         1: Create Item
         2: Delete Item
-        `)
+        ${storeInfo}
+        `);
     }
-
 
     createStore(){
         let name = prompt('Enter Store Name.');
-        this.stores.push(new Store(name))
+        this.stores.push(new Store(name));
+              
     }
 
     viewStore(){
-        let index = prompt ('Enter the number of the store you wish to view.'); 
-        if (index > -1 && index < this.stores.length){                          // doesnt work
+        let index = prompt ('Enter the index of the store you wish to view.');
+        if (index > -1 && index < this.stores.length){
             this.selectedStore = this.stores[index];
-            let description = 'Welcome to ' + this.selectedStore.name + '\n'
+            let description = 'Welcome to ' + this.selectedStore.name + '\n';
 
             for(let i = 0; i< this.selectedStore.items.length; i++){
-                descript += i +') ' + this.selectedStore.items[i].name + ' - ' + this.selectedStore.items[i].price + '\n';
+                description += i +') ' + this.selectedStore.items[i].name + ' - ' + this.selectedStore.items[i].price + '\n';
             }
             let selection = this.showItemMenuOptions(description);
             switch (selection){
@@ -228,14 +103,14 @@ class Menu {
                     break;
                 case '2':
                     this.deleteItem();
-            }
+             }
         }
     }
 
-    displayStores(){
+    displayStores (){
         let storesString = '';
         for (let i = 0; i < this.stores.length; i++){
-            storesString += i + ': ' + this.stores[i].name + '\n'
+            storesString += i + ': ' + this.stores[i].name + '\n';
         }
         alert(storesString);
     }
@@ -247,23 +122,22 @@ class Menu {
         }
     }
 
- 
 
     createItem() {
         let name = prompt('Enter name for new Item.');
         let price = prompt('Enter price for new Item');
-        this.selectedStore.item.push(new Item(name, price));
+        this.selectedStore.items.push(new Item(name, price));
     }
 
     deleteItem(){
-        let index = prompt('Enter the Item you wish to delete');
+        let index = prompt('Enter the index of the Item you wish to delete');
         if (index > -1 && index < this.selectedStore.items.length){
             this.selectedStore.items.splice(index, 1);
         }
-    }  
+    }
+
 
 }
-
 
 
 let menu = new Menu();
