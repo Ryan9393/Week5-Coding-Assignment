@@ -193,8 +193,8 @@ class Menu {
         0: Exit
         1: Create Store
         2: View Store
-        3: Close Store
-        4: Display All Stores
+        3: Display All Stores
+        4: Delete Store
         `)
     }
 
@@ -205,9 +205,9 @@ class Menu {
     }
 
     viewStore(){
-        let index = prompt ('Enter the name of the store you wish to view.');
-        if (index > -1 && index < this.stores.length){
-            this.selectedStore = this.stores[i];
+        let index = prompt ('Enter the number of the store you wish to view.'); 
+        if (index > -1 && index < this.stores.length){                          // doesnt work
+            this.selectedStore = this.stores[index];
             let description = 'Welcome to ' + this.selectedStore.name + '\n'
 
             for(let i = 0; i< this.selectedStore.item.length; i++){
@@ -233,8 +233,8 @@ class Menu {
     }
 
     deleteStore(){
-        let index = prompt('Enter the name of the Store you want to close.');
-        if(index > -1 && index < this.stores.length){
+        let index = prompt('Enter the number of the Store you want to close.');   
+        if(index > -1 && index < this.stores.length){   
             this.stores.splice(index, 1);
         }
     }
