@@ -4,7 +4,7 @@
 // c.	Your menu should have the options to create, view, and delete elements.
 
 
-class Item {
+class Item {                                        
     constructor(name,price){
         this.name = name
         this.price = price
@@ -94,7 +94,7 @@ class Menu {
             let description = 'Welcome to ' + this.selectedStore.name + '\n';
 
             for(let i = 0; i< this.selectedStore.items.length; i++){
-                description += i +') ' + this.selectedStore.items[i].name + ' - ' + this.selectedStore.items[i].price + '\n';
+                description += i +': ' + this.selectedStore.items[i].name + ' - ' + this.selectedStore.items[i].price + '\n';
             }
             let selection = this.showItemMenuOptions(description);
             switch (selection){
