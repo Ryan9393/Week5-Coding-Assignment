@@ -198,6 +198,14 @@ class Menu {
         `)
     }
 
+    showItemMenuOptions(storeInfo){
+        return prompt(`
+        0: Back
+        1: Create Item
+        2: Delete Item
+        `)
+    }
+
 
     createStore(){
         let name = prompt('Enter Store Name.');
@@ -210,10 +218,10 @@ class Menu {
             this.selectedStore = this.stores[index];
             let description = 'Welcome to ' + this.selectedStore.name + '\n'
 
-            for(let i = 0; i< this.selectedStore.item.length; i++){
+            for(let i = 0; i< this.selectedStore.items.length; i++){
                 descript += i +') ' + this.selectedStore.items[i].name + ' - ' + this.selectedStore.items[i].price + '\n';
             }
-            let selection = this.showTeamMenuOptions(description);
+            let selection = this.showItemMenuOptions(description);
             switch (selection){
                 case '1':
                     this.createItem();
@@ -239,13 +247,7 @@ class Menu {
         }
     }
 
-    showItemMenuOptions(storeInfo){
-        return prompt(`
-        0: Back
-        1: Create Item
-        2: Delete Item
-        `)
-    }
+ 
 
     createItem() {
         let name = prompt('Enter name for new Item.');
