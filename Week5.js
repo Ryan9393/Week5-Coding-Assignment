@@ -130,7 +130,6 @@
 
 
 
-let newStore = '';
 class Item {
     constructor(name,price){
         this.name = name
@@ -162,7 +161,7 @@ class Store {
 
 class Menu {
     constructor() {
-        this.stores = ["hello","what"]
+        this.stores = []
         this.selectedStore = null;
     }
     start() {
@@ -199,20 +198,10 @@ class Menu {
         `)
     }
 
-    showItemMenuOptions(storeInfo){
-        return prompt(`
-        0: Back
-        1: Create Item
-        2: Delete Item
-        `)
-    }
 
     createStore(){
-        // let name = prompt('Enter Store Name.');
-        // newStore = new Store(name);
-        // console.log(this.stores.push(newStore));
-        // return this.stores.push(newStore);
-        console.log("hi");
+        let name = prompt('Enter Store Name.');
+        this.stores.push(new Store(name))
     }
 
     viewStore(){
@@ -235,13 +224,29 @@ class Menu {
         }
     }
 
-    displayStores (){
+    displayStores(){
         let storesString = '';
         for (let i = 0; i < this.stores.length; i++){
             storesString += i + ': ' + this.stores[i].name + '\n'
         }
         alert(storesString);
     }
+
+    deleteStore(){
+        let index = prompt('Enter the name of the Store you want to close.');
+        if(index > -1 && index < this.stores.length){
+            this.stores.splice(index, 1);
+        }
+    }
+
+    showItemMenuOptions(storeInfo){
+        return prompt(`
+        0: Back
+        1: Create Item
+        2: Delete Item
+        `)
+    }
+
     createItem() {
         let name = prompt('Enter name for new Item.');
         let price = prompt('Enter price for new Item');
@@ -253,8 +258,7 @@ class Menu {
         if (index > -1 && index < this.selectedStore.items.length){
             this.selectedStore.items.splice(index, 1);
         }
-    }
-
+    }  
 
 }
 
